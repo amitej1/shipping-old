@@ -1,0 +1,19 @@
+<p>
+<%@ups_rates.each do |rate|%>
+ <%service_name = "#{rate.service_name} , 
+ #{(rate.price).to_f/100.round(2)}"%>
+
+
+ <% postage_rate = (@bank.get_rate((res.rate_estimates[0].currency,:USD)*(rate.price).to_f)/100).round(2) %> 
+
+ <%service_names << service_name%>
+ <%=f.radio_button :service_name,service_name%> <%= service_name %> <br/>
+ <%service_names.length do |i|%>
+ <%if i.checked == "true"%> 
+
+ <%= f.hidden_field :service_name,:value=>service_name %>  
+
+        <%end%>
+     <%end%>
+ <%end%>
+</p>
